@@ -1,17 +1,17 @@
 # Test Dockerfile for Prometheus Exporter Plugin with OpenSearch 3.0.0
-FROM opensearchproject/opensearch:3.1.0
+FROM opensearchproject/opensearch:3.0.0
 
 # Switch to root to install plugin
 USER root
 
 # Copy the plugin ZIP file to the container
-COPY build/distributions/prometheus-exporter-3.1.0.0.zip /tmp/
+COPY build/distributions/prometheus-exporter-3.0.0.0.zip /tmp/
 
 # Install the plugin
-RUN /usr/share/opensearch/bin/opensearch-plugin install file:///tmp/prometheus-exporter-3.1.0.0.zip --batch
+RUN /usr/share/opensearch/bin/opensearch-plugin install file:///tmp/prometheus-exporter-3.0.0.0.zip --batch
 
 # Clean up
-RUN rm /tmp/prometheus-exporter-3.1.0.0.zip
+RUN rm /tmp/prometheus-exporter-3.0.0.0.zip
 
 # Switch back to opensearch user
 USER opensearch
@@ -19,7 +19,7 @@ USER opensearch
 # Configure OpenSearch for single-node testing
 ENV discovery.type=single-node
 ENV OPENSEARCH_INITIAL_ADMIN_PASSWORD=MyStrongPassword123!
-
+ENV DISABLE_SECURITY_PLUGIN=true
 # Expose OpenSearch port and metrics endpoint
 EXPOSE 9200 9600
 

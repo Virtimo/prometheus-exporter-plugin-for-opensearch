@@ -34,9 +34,6 @@ nbactions.xml
 .gradle/
 build/
 
-# Allow distribution binaries
-!dist/
-
 # vscode stuff
 .vscode/
 
